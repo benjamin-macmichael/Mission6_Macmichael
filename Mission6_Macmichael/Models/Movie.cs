@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+//This is the Model that will be used when building the database structure
+//All fields cannot be null except for Edited, LentTo, and Notes
 namespace Mission6_Macmichael.Models
 {
     public class Movie

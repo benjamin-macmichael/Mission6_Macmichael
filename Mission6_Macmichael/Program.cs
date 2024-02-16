@@ -1,3 +1,12 @@
+/*
+ Author: Ben Macmichael
+Section 3
+
+This program is an MVC Web App that implements an SQLite database for keeping track of movies
+
+There is also some information on Joel Hilton, the main user
+ */
+
 using Microsoft.EntityFrameworkCore;
 using Mission6_Macmichael.Models;
 

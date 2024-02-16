@@ -14,26 +14,30 @@ namespace Mission6_Macmichael.Controllers
         }
         public IActionResult Index()
         {
+            //show landing page
             return View();
         }
 
         public IActionResult GetToKnow()
         {
+            //show GetToKnow page
             return View();
         }
 
         [HttpGet]
         public IActionResult Movie()
         {
+            //show Movie page
             return View();
         }
         [HttpPost]
         public IActionResult Movie(Movie response)
         {
-            _context.Movies.Add(response); //Add record to the database
+            //Add record to the database and save it
+            _context.Movies.Add(response); 
             _context.SaveChanges();
 
-            return View("Confirmation", response);
+            return View("Confirmation");
         }
     }
 }
