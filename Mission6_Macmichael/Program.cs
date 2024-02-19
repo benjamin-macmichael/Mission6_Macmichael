@@ -2,7 +2,7 @@
 Author: Ben Macmichael
 Section 3
 
-This branch features all aspects of CRUD in the app, for Mission 7
+This branch features all aspects of CRUD in the movie app for Joel, for Mission 7
 
 This program is an MVC Web App that implements an SQLite database for keeping track of movies
 
