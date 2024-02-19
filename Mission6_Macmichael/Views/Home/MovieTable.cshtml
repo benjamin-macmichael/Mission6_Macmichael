@@ -1,0 +1,60 @@
+﻿@model List<Movie>
+
+
+<h1>Joel's Movie Collection</h1>
+
+<table class="table table-bordered">
+    <thead class="fw-bold">
+        <tr>
+            <td>Category</td>
+            <td>Title</td>
+            <td>Year</td>
+            <td>Director</td>
+            <td>Rating</td>
+            <td>Edited</td>
+            <td>Lent To</td>
+            <td>Copied to Plex</td>
+            <td>Notes</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var row in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        string categoryName;
+                        switch (row.CategoryId)
+                        {
+                            case 1: categoryName = "Miscellaneous"; break;
+                            case 2: categoryName = "Drama"; break;
+                            case 3: categoryName = "Television"; break;
+                            case 4: categoryName = "Horror/Suspense"; break;
+                            case 5: categoryName = "Comedy"; break;
+                            case 6: categoryName = "Family"; break;
+                            case 7: categoryName = "Action/Adventure"; break;
+                            case 8: categoryName = "VHS"; break;
+                            default: categoryName = "Unknown"; break;
+                        }
+                    }
+                    @categoryName
+                </td>
+                    <td>@row.Title</td>
+                    <td>@row.Year</td>
+                    <td>@row.Director</td>
+                    <td>@row.Rating</td>
+                    <td>@row.Edited</td>
+                    <td>@row.LentTo</td>
+                    <td>@row.CopiedToPlex</td>
+                    <td>@row.Notes</td>
+
+                    <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@row.MovieId">Edit</a></td>
+                    <td><a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@row.MovieId">Delete</a></td>
+                </tr>
+        
+        }
+    </tbody>
+</table>

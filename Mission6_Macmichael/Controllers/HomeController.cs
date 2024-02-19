@@ -27,17 +27,78 @@ namespace Mission6_Macmichael.Controllers
         [HttpGet]
         public IActionResult Movie()
         {
-            //show Movie page
-            return View();
+            return View(new Movie());
         }
         [HttpPost]
         public IActionResult Movie(Movie response)
         {
-            //Add record to the database and save it
-            _context.Movies.Add(response); 
+            if (ModelState.IsValid)
+            {
+                //Add record to the database and save it
+                _context.Movies.Add(response);
+                _context.SaveChanges();
+
+                return View("Confirmation");
+            }
+            else
+            {
+                return View(response);
+            }
+            
+        }
+        public IActionResult MovieTable()
+        {
+            var movies = _context.Movies
+                .OrderBy(x => x.Title)
+                .Select(x => new Movie
+                {
+                    MovieId = x.MovieId,
+                    CategoryId = x.CategoryId,
+                    Title = x.Title ?? "",
+                    Year = x.Year ?? "",
+                    Director = x.Director ?? "",
+                    Rating = x.Rating ?? "",
+                    Edited = x.Edited,
+                    LentTo = x.LentTo ?? "",
+                    CopiedToPlex = x.CopiedToPlex,
+                    Notes = x.Notes ?? "",
+                })
+                .ToList();
+
+            return View(movies);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            return View("Movie", recordToEdit);
+        }
+        [HttpPost]
+        public IActionResult Edit(Movie updatedInfo)
+        {
+            _context.Update(updatedInfo);
             _context.SaveChanges();
 
-            return View("Confirmation");
+            return RedirectToAction("MovieTable");
         }
+
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieId == id);
+
+            return View(recordToDelete);
+        }
+        [HttpPost]
+        public IActionResult Delete(Movie recordToDelete)
+        {
+            _context.Movies.Remove(recordToDelete);
+            _context.SaveChanges();
+
+            return RedirectToAction("MovieTable");
+        }
+
     }
 }
