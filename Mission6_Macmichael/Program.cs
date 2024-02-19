@@ -1,5 +1,5 @@
 /*
- Author: Ben Macmichael
+Author: Ben Macmichael
 Section 3
 
 This branch features all aspects of CRUD in the app, for Mission 7
