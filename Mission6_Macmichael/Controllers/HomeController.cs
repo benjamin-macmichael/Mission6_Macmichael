@@ -27,6 +27,9 @@ namespace Mission6_Macmichael.Controllers
         [HttpGet]
         public IActionResult Movie()
         {
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.Category)
+                .ToList();
             return View(new Movie());
         }
         [HttpPost]
@@ -42,12 +45,16 @@ namespace Mission6_Macmichael.Controllers
             }
             else
             {
+                ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.Category)
+                .ToList();
                 return View(response);
             }
             
         }
         public IActionResult MovieTable()
         {
+            //This takes all rows in the Movies table, converts any null values to an empty string, and then converts it into a list to be passed to the view
             var movies = _context.Movies
                 .OrderBy(x => x.Title)
                 .Select(x => new Movie
@@ -65,6 +72,10 @@ namespace Mission6_Macmichael.Controllers
                 })
                 .ToList();
 
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.Category)
+                .ToList();
+
             return View(movies);
         }
 
@@ -72,6 +83,10 @@ namespace Mission6_Macmichael.Controllers
         {
             var recordToEdit = _context.Movies
                 .Single(x => x.MovieId == id);
+
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.Category)
+                .ToList();
 
             return View("Movie", recordToEdit);
         }
