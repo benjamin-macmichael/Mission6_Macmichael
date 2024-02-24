@@ -27,9 +27,12 @@ namespace Mission6_Macmichael.Controllers
         [HttpGet]
         public IActionResult Movie()
         {
+            //Create a way for html page to access categories
             ViewBag.Categories = _context.Categories
                 .OrderBy(x => x.Category)
                 .ToList();
+
+            //return the view with a new model to be able to add a movie to the db on the page
             return View(new Movie());
         }
         [HttpPost]
@@ -81,18 +84,21 @@ namespace Mission6_Macmichael.Controllers
 
         public IActionResult Edit(int id)
         {
+            //find the matching record in databasr to edit
             var recordToEdit = _context.Movies
                 .Single(x => x.MovieId == id);
 
             ViewBag.Categories = _context.Categories
                 .OrderBy(x => x.Category)
                 .ToList();
-
+            
+            //return the movie page but instead of sending a new movie model send the record to edit
             return View("Movie", recordToEdit);
         }
         [HttpPost]
         public IActionResult Edit(Movie updatedInfo)
         {
+            //update the edited record
             _context.Update(updatedInfo);
             _context.SaveChanges();
 
@@ -101,14 +107,17 @@ namespace Mission6_Macmichael.Controllers
 
         public IActionResult Delete(int id)
         {
+            //pull record to Delete
             var recordToDelete = _context.Movies
                 .Single(x => x.MovieId == id);
 
+            //return Delete page
             return View(recordToDelete);
         }
         [HttpPost]
         public IActionResult Delete(Movie recordToDelete)
         {
+            //Delete record
             _context.Movies.Remove(recordToDelete);
             _context.SaveChanges();
 

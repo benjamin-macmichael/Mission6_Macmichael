@@ -25,8 +25,10 @@
         {
             <tr>
                 <td>
-                    @{
+                    @{ //show category name based off the CategoryId in the Model
+
                         string categoryName = ""; // Initialize categoryName
+
                         foreach (Categories m in ViewBag.Categories)
                         {
                             if (row.CategoryId == m.CategoryId)
